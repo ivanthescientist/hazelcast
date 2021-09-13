@@ -20,6 +20,7 @@ import com.hazelcast.internal.serialization.DataSerializerHook;
 import com.hazelcast.internal.serialization.impl.ArrayDataSerializableFactory;
 import com.hazelcast.internal.serialization.impl.FactoryIdHelper;
 import com.hazelcast.internal.util.ConstructorFunction;
+import com.hazelcast.jet.sql.impl.expression.json.InfixJsonFieldOperator;
 import com.hazelcast.jet.sql.impl.expression.json.JsonQueryFunction;
 import com.hazelcast.jet.sql.impl.expression.json.JsonValueFunction;
 import com.hazelcast.jet.sql.impl.expression.json.ParseJsonFunction;
@@ -39,8 +40,9 @@ public class JetSqlSerializerHook implements DataSerializerHook {
     public static final int JSON_QUERY = 1;
     public static final int PARSE_JSON = 2;
     public static final int JSON_VALUE = 3;
+    public static final int INFIX_JSON_FIELD = 4;
 
-    public static final int LEN = JSON_VALUE + 1;
+    public static final int LEN = INFIX_JSON_FIELD + 1;
 
     @Override
     public int getFactoryId() {
@@ -55,6 +57,7 @@ public class JetSqlSerializerHook implements DataSerializerHook {
         constructors[JSON_QUERY] = arg -> new JsonQueryFunction();
         constructors[PARSE_JSON] = arg -> new ParseJsonFunction();
         constructors[JSON_VALUE] = arg -> new JsonValueFunction();
+        constructors[INFIX_JSON_FIELD] = arg -> new InfixJsonFieldOperator();
 
         return new ArrayDataSerializableFactory(constructors);
     }

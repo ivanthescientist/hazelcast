@@ -27,6 +27,7 @@ import com.hazelcast.jet.sql.impl.connector.SqlConnector;
 import com.hazelcast.jet.sql.impl.connector.file.FileTableFunction;
 import com.hazelcast.jet.sql.impl.connector.generator.SeriesGeneratorTableFunction;
 import com.hazelcast.jet.sql.impl.connector.generator.StreamGeneratorTableFunction;
+import com.hazelcast.jet.sql.impl.parse.SqlInfixJsonFieldOperator;
 import com.hazelcast.jet.sql.impl.validate.operators.special.HazelcastCollectionTableOperator;
 import com.hazelcast.jet.sql.impl.validate.operators.special.HazelcastMapValueConstructor;
 import com.hazelcast.jet.sql.impl.validate.operators.special.HazelcastRowOperator;
@@ -226,8 +227,9 @@ public final class HazelcastSqlOperatorTable extends ReflectiveSqlOperatorTable 
     public static final SqlFunction TO_TIMESTAMP_TZ = HazelcastToTimestampTzFunction.INSTANCE;
     public static final SqlFunction TO_EPOCH_MILLIS = HazelcastToEpochMillisFunction.INSTANCE;
     public static final SqlFunction JSON_QUERY = HazelcastJsonQueryFunction.INSTANCE;
-    public static final SqlOperator PARSE_JSON = HazelcastParseJsonFunction.INSTANCE;
-    public static final SqlOperator JSON_VALUE = HazelcastJsonValueFunction.INSTANCE;
+    public static final SqlFunction PARSE_JSON = HazelcastParseJsonFunction.INSTANCE;
+    public static final SqlFunction JSON_VALUE = HazelcastJsonValueFunction.INSTANCE;
+    public static final SqlOperator INFIX_JSON_FIELD = SqlInfixJsonFieldOperator.INSTANCE;
 
     public static final SqlPostfixOperator DESC = HazelcastDescOperator.DESC;
 

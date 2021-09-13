@@ -149,6 +149,9 @@ public final class UnsupportedOperationVisitor extends SqlBasicVisitor<Void> {
         // Ordering
         SUPPORTED_KINDS.add(SqlKind.DESCENDING);
 
+        // Custom
+        SUPPORTED_KINDS.add(SqlKind.OTHER);
+
         // Supported operators
         SUPPORTED_OPERATORS = new HashSet<>();
 
@@ -216,6 +219,7 @@ public final class UnsupportedOperationVisitor extends SqlBasicVisitor<Void> {
         SUPPORTED_OPERATORS.add(HazelcastSqlOperatorTable.JSON_FLAT_FILE);
         SUPPORTED_OPERATORS.add(HazelcastSqlOperatorTable.AVRO_FILE);
         SUPPORTED_OPERATORS.add(HazelcastSqlOperatorTable.PARQUET_FILE);
+        SUPPORTED_OPERATORS.add(HazelcastSqlOperatorTable.INFIX_JSON_FIELD);
     }
 
     // The top level select is used to filter out nested selects with FETCH/OFFSET

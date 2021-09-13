@@ -16,6 +16,7 @@
 
 package com.hazelcast.jet.sql.impl.opt.physical.visitor;
 
+import com.hazelcast.jet.sql.impl.expression.json.InfixJsonFieldOperator;
 import com.hazelcast.jet.sql.impl.expression.json.JsonQueryFunction;
 import com.hazelcast.jet.sql.impl.expression.json.JsonValueFunction;
 import com.hazelcast.jet.sql.impl.expression.json.ParseJsonFunction;
@@ -325,6 +326,8 @@ public final class RexToExpression {
                     assert operands.length == 2;
 
                     return ConcatFunction.create(operands[0], operands[1]);
+                } else if (operator == HazelcastSqlOperatorTable.INFIX_JSON_FIELD) {
+                    return InfixJsonFieldOperator.create(operands[0], operands[1]);
                 }
 
                 break;

@@ -535,3 +535,16 @@ boolean HazelcastTimeZoneOpt() :
     { return false; }
 }
 
+void SqlInfixJsonFieldOperator(List<Object> list, ExprContext exprContext, Span s) :
+{
+    SqlNode pathValue = null;
+}
+{
+    <INFIX_JSON_FIELD> {
+        checkNonQueryExpression(exprContext);
+    }
+    pathValue = Literal() {
+        list.add(new SqlParserUtil.ToTreeListItem(SqlInfixJsonFieldOperator.INSTANCE, s.pos()));
+        list.add(pathValue);
+    }
+}

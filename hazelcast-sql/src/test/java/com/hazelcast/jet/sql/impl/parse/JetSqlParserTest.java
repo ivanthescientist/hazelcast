@@ -23,8 +23,10 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.apache.calcite.avatica.util.Casing;
 import org.apache.calcite.avatica.util.Quoting;
+import org.apache.calcite.sql.SqlBasicCall;
 import org.apache.calcite.sql.SqlKind;
 import org.apache.calcite.sql.SqlNode;
+import org.apache.calcite.sql.SqlSelect;
 import org.apache.calcite.sql.parser.SqlParseException;
 import org.apache.calcite.sql.parser.SqlParser;
 import org.apache.calcite.sql.parser.SqlParser.Config;
@@ -273,6 +275,14 @@ public class JetSqlParserTest {
         assertThat(node.tableNames()).isEqualTo(singletonList("t"));
         assertThat(node.getSource().getKind()).isEqualTo(SqlKind.SELECT);
         assertThat(node.getTargetColumnList()).isNullOrEmpty();
+    }
+
+    @Test
+    public void test_infixJsonValueOperator() throws SqlParseException {
+        String sql = "SELECT this->'byteField' FROM test";
+        final SqlSelect node = (SqlSelect) parse(sql);
+        final SqlBasicCall call = (SqlBasicCall) node.getSelectList().get(0);
+        assertThat(call.getOperator()).isInstanceOf(SqlInfixJsonFieldOperator.class);
     }
 
     private static SqlNode parse(String sql) throws SqlParseException {
