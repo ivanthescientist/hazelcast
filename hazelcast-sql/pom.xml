@@ -38,7 +38,7 @@
 
         <checkstyle.headerLocation>${project.parent.basedir}/checkstyle/ClassHeaderHazelcastCommunity.txt</checkstyle.headerLocation>
 
-        <calcite.version>1.32.0</calcite.version>
+        <calcite.version>1.34.0</calcite.version>
         <confluent.version>6.2.2</confluent.version>
         <immutables.version>2.9.3</immutables.version>
     </properties>
@@ -540,6 +540,10 @@
                 <exclusion>
                     <groupId>org.locationtech.proj4j</groupId>
                     <artifactId>proj4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-math3</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
